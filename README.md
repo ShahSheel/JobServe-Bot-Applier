@@ -1,5 +1,6 @@
 # JobServe-Bot-Applier
 
+##Make sure to star this repo :D 
 
 ## Requirements
 
