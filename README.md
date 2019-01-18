@@ -1,8 +1,5 @@
 # JobServe-Bot-Applier
 
-## Steps:
-* ⭐ this repo
-* Clone / Fork it 
 
 ## Requirements to run
 
