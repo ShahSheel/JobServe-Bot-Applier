@@ -1,14 +1,14 @@
 # JobServe-Bot-Applier
 
-##Make sure to star this repo :D 
+## Steps:
+* ⭐ this repo
+* Clone / Fork it 
 
-## Requirements
+## Requirements to run
 
 * Python 3 
 
-
-
-## Installations
+## Installing packages required
 
 ```
 pip install -U selenium
