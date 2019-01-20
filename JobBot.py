@@ -1,23 +1,25 @@
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException, ElementNotVisibleException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support.select import Select
 import time
 
 options = webdriver.ChromeOptions()
 options.add_argument('headless')
+print("Running in headless mode")
 options.binary = 'C:\\chromedriver\\chromedriver.exe'
 
 LOCATION = "London"
 JOB_TITLE = "Graduate Software Developer"
 DISTANCE = 3 #0  = 1 mile , 1 = 5 miles,2 = 10 miles, 3 = 15 miles, 4 = 25, 5 = 50, 6 = 75, 7 = 100
-EMAIL = "EMAIL ADDRESS HERE"
-PASSWORD = "PASSWORD HERE"
+EMAIL = "shahsheel@outlook.com"
+PASSWORD = "NthQwA3J8DXsm7S"
 MAX_APPLIED = 27 #Does not do the first 2
+COUNT = 0
+APPLIEDJOBS = []
 
 driver = webdriver.Chrome(chrome_options=options)
-print("Running in headless mode")
 path = "https://www.jobserve.com/gb/en/Candidate/Login.aspx"
 driver.get(path)
 
@@ -49,10 +51,6 @@ job_title = driver.find_element_by_xpath('//*[@id="txtTitle"]')
 job_title.click()
 job_title.send_keys(JOB_TITLE)
 
-#keywords = driver.find_element_by_xpath('//*[@id="txtKey"]')
-#keywords.sendKeys();
-#keywords.sendKeys(Keys.RETURN);
-
 location = driver.find_element_by_xpath('//*[@id="txtLoc"]')
 location.click()
 location.send_keys(LOCATION)
@@ -69,28 +67,21 @@ location.send_keys(Keys.RETURN)
 print("Waiting 30 seconds")
 time.sleep(30) #Safe wait. Depends on internet connection.
 print("Adding jobs to the basket")
+actions = ActionChains(driver)
 
-#next_job = driver.find_element_by_xpath('//*[@id="jobreslist_outercontainer"]/div/div[2]/div')
-#next_job.click()
-#next_job.send_keys(Keys.ARROW_DOWN)
-COUNT = 0
 while(COUNT <= MAX_APPLIED):
-    add_job =  driver.find_element_by_xpath('//*[(@id = "td_addbskt_btn")]')
-    add_job.click()
-    COUNT+=1
-    time.sleep(2)
-    actions = ActionChains(driver)
-    actions.send_keys(Keys.ARROW_DOWN)
-    actions.perform()
-    print("Job added")
+    try:
+        add_job =  driver.find_element_by_xpath('//*[(@id = "td_addbskt_btn")]')
+        add_job.click()
+        COUNT+=1
+        actions.send_keys(Keys.ARROW_DOWN)
+        actions.perform()
+        time.sleep(1)
+        print("Job added #1")
+    except ElementNotVisibleException:
+        print("Already applied")
+        actions.send_keys(Keys.ARROW_DOWN)
+        actions.perform()
+        time.sleep(2)
 
-
-apply = driver.find_element_by_xpath('//*[@id="basketLinkMini"]')
-apply.click()
-
-time.sleep(5)
-applyButton = driver.find_element_by_xpath('//*[@id="body"]/div[6]/div[3]/div/button[1]')
-applyButton.click()
-
-print("Jobs are ready to be applied for")
 
