@@ -13,8 +13,8 @@ options.binary = 'C:\\chromedriver\\chromedriver.exe'
 LOCATION = "London"
 JOB_TITLE = "Graduate Software Developer"
 DISTANCE = 3 #0  = 1 mile , 1 = 5 miles,2 = 10 miles, 3 = 15 miles, 4 = 25, 5 = 50, 6 = 75, 7 = 100
-EMAIL = "shahsheel@outlook.com"
-PASSWORD = "NthQwA3J8DXsm7S"
+EMAIL = ""
+PASSWORD = ""
 MAX_APPLIED = 27 #Does not do the first 2
 COUNT = 0
 APPLIEDJOBS = []
